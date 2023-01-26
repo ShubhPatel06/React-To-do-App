@@ -1,23 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import "./App.css";
+import { Login } from "./login";
+import { Register } from "./register";
+import { List } from "./list";
 
 function App() {
+  const [currentView, setCurrentView] = useState("Login");
+
+  const toggleView = (viewName) => {
+    setCurrentView(viewName);
+  };
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="App flex justify-center items-center h-screen bg-gradient-to-b from-purple-500 to-pink-500">
+      {(() => {
+        if (currentView === "Login") {
+          return <Login onFormSwitch={toggleView} />;
+        } else if (currentView === "Register") {
+          return <Register onFormSwitch={toggleView} />;
+        } else if (currentView === "List") {
+          return <List onFormSwitch={toggleView} />;
+        } else {
+          return <Login onFormSwitch={toggleView} />;
+        }
+      })()}
     </div>
   );
 }
