@@ -56,7 +56,7 @@ export const List = (props) => {
         </div>
         <hr className="w-full border-1 border-gray-300 mb-6" />
 
-        <ul className="tasks-box list-none overflow-auto mb-5 h-96 scrollbar-thin scrollbar-track-slate-200 scrollbar">
+        <ul className="tasks-box list-none overflow-auto mb-5 h-96 scrollbar-thin scrollbar-track-slate-200">
           {props.displayTasks}
         </ul>
 
