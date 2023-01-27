@@ -1,13 +1,40 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const DATA = [
+  {
+    id: "todo-0",
+    name: "Eat",
+    startDate: "28-01-2023",
+    endDate: "31-01-2023",
+    priority: "Medium",
+    completed: true,
+  },
+  {
+    id: "todo-1",
+    name: "Eat",
+    startDate: "28-01-2023",
+    endDate: "01-02-2023",
+    priority: "High",
+    completed: false,
+  },
+  {
+    id: "todo-2",
+    name: "Eat",
+    startDate: "28-01-2023",
+    endDate: "30-01-2023",
+    priority: "Low",
+    completed: false,
+  },
+];
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <App />
+    <App tasks={DATA} />
   </React.StrictMode>
 );
 

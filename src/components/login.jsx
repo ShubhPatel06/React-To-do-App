@@ -10,7 +10,7 @@ export const Login = (props) => {
   };
 
   return (
-    <div className="form-container bg-white p-8 w-96 rounded-lg">
+    <div className="form-container  bg-white p-8 w-96 rounded-lg ">
       <form className="loginForm" onSubmit={handleSubmit}>
         <h1 className="text-3xl mb-4 font-bold text-gray-800">Login</h1>
 

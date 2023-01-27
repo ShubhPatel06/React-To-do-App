@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-
+import { Todo } from "./todo";
+import FilterButton from "./filterButtons";
 export const List = (props) => {
   const [showModal, setShowModal] = React.useState(false);
 
-  const [tableData, setTableData] = useState([]);
+  const [taskData, setTaskData] = useState([]);
   const [formInputData, setformInputData] = useState({
     task: "",
     startDate: "",
@@ -11,30 +12,34 @@ export const List = (props) => {
     priority: "",
   });
 
-  const handleChange = (evnt) => {
+  const handleChange = (e) => {
     const newInput = (data) => ({
       ...data,
-      [evnt.target.name]: evnt.target.value,
+      [e.target.name]: e.target.value,
     });
+    console.log(newInput);
+
     setformInputData(newInput);
   };
 
-  const handleSubmit = (evnt) => {
-    evnt.preventDefault();
-    const checkEmptyInput = !Object.values(formInputData).every(
-      (res) => res === ""
-    );
-    if (checkEmptyInput) {
-      const newData = (data) => [...data, formInputData];
-      setTableData(newData);
-      const emptyInput = { task: "", startDate: "", endDate: "", priority: "" };
-      setformInputData(emptyInput);
-    }
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const newData = {
+      name: formInputData.task,
+      startDate: formInputData.startDate,
+      endDate: formInputData.endDate,
+      priority: formInputData.priority,
+    };
+
+    console.log(newData);
+    props.addTask(newData);
+    const emptyInput = { task: "", startDate: "", endDate: "", priority: "" };
+    setformInputData(emptyInput);
   };
 
   return (
-    <div className="container grid lg:grid-cols-2 gap-8 md:grid-cols-1 sm:grid-cols-1">
-      <div className="list-box bg-white p-8 rounded-md">
+    <div className=" grid lg:grid-cols-2 gap-8 md:grid-cols-1 sm:grid-cols-1 max-w-7xl w-3/4">
+      <div className="list-box bg-white p-8 rounded-md h-full">
         <div className="title-box flex justify-between items-center mb-6">
           <h1 className="m-0 text-3xl font-bold text-gray-800">To do's</h1>
           <button
@@ -45,44 +50,15 @@ export const List = (props) => {
           </button>
         </div>
         <div className="button-grp flex justify-around items-center gap-4 mb-6">
-          <button
-            type="button"
-            className="px-4 py-3 w-1/3 rounded-md font-bold  bg-pink-300 hover:bg-pink-200"
-          >
-            All
-          </button>
-          <button
-            type="button"
-            className="px-4 py-3 w-1/3 rounded-md font-bold bg-purple-300 hover:bg-purple-200"
-          >
-            Active
-          </button>
-          <button
-            type="button"
-            className="px-4 py-3  w-1/3 rounded-md font-bold bg-slate-300 hover:bg-slate-200"
-          >
-            Completed
-          </button>
+          <FilterButton />
+          <FilterButton />
+          <FilterButton />
         </div>
-        <div className="tasks-box">
-          <div className="task">
-            <div className="task-info flex gap-3 ">
-              <input type="checkbox" className="w-5" name="" id="" />
-              <label htmlFor="" className="text-3xl">
-                Task Name
-              </label>
-            </div>
-            <div className="additional-info flex justify-around items-center">
-              <p>Start Date:</p>
-              <p>End Date:</p>
-              <p>Priority:</p>
-            </div>
-            <div className="action-box">
-              <button>Edit</button>
-              <button>Delete</button>
-            </div>
-          </div>
-        </div>
+        <hr className="w-full border-1 border-gray-300 mb-6" />
+
+        <ul className="tasks-box list-none overflow-auto mb-5 h-96 scrollbar-thin scrollbar-track-slate-200 scrollbar">
+          {props.displayTasks}
+        </ul>
 
         <a className="link" onClick={() => props.onFormSwitch("Login")}>
           Back
@@ -120,6 +96,7 @@ export const List = (props) => {
                         type="text"
                         id="task"
                         name="task"
+                        value={formInputData.task}
                         onChange={handleChange}
                         className="rounded-md border-2 p-3 border-gray-300 focus:outline-gray-500"
                       />
@@ -132,6 +109,7 @@ export const List = (props) => {
                         type="date"
                         id="startDate"
                         name="startDate"
+                        value={formInputData.startDate}
                         onChange={handleChange}
                         className="rounded-md border-2 p-3 border-gray-300 focus:outline-gray-500"
                       />
@@ -144,6 +122,7 @@ export const List = (props) => {
                         type="date"
                         id="endDate"
                         name="endDate"
+                        value={formInputData.endDate}
                         onChange={handleChange}
                         className="rounded-md border-2 p-3 border-gray-300 focus:outline-gray-500"
                       />
@@ -156,6 +135,7 @@ export const List = (props) => {
                         type="text"
                         id="priority"
                         name="priority"
+                        value={formInputData.priority}
                         onChange={handleChange}
                         className="rounded-md border-2 p-3 border-gray-300 focus:outline-gray-500"
                       />
