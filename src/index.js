@@ -15,7 +15,7 @@ const DATA = [
   },
   {
     id: "todo-1",
-    name: "Eat",
+    name: "Sleep",
     startDate: "28-01-2023",
     endDate: "01-02-2023",
     priority: "High",
@@ -23,7 +23,7 @@ const DATA = [
   },
   {
     id: "todo-2",
-    name: "Eat",
+    name: "Code",
     startDate: "28-01-2023",
     endDate: "30-01-2023",
     priority: "Low",
@@ -31,10 +31,25 @@ const DATA = [
   },
 ];
 
+const PROJECT_DATA = [
+  {
+    id: "project-0",
+    name: "To do list",
+    description: "A to do list implemented in React JS",
+    completed: true,
+  },
+  {
+    id: "project-1",
+    name: "Ecommerce",
+    description: "An ecommerce to be implemented in Laravel",
+    completed: false,
+  },
+];
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <App tasks={DATA} />
+    <App tasks={DATA} projects={PROJECT_DATA} />
   </React.StrictMode>
 );
 

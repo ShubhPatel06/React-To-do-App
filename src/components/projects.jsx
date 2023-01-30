@@ -1,13 +1,11 @@
 import React, { useState } from "react";
 
-export const Todo = (props) => {
+export const Project = (props) => {
   const [showModal, setShowModal] = React.useState(false);
 
   const [formInputData, setformInputData] = useState({
-    task: props.name,
-    startDate: props.startDate,
-    endDate: props.endDate,
-    priority: props.priority,
+    project: props.name,
+    description: props.description,
   });
 
   const handleChange = (e) => {
@@ -23,46 +21,31 @@ export const Todo = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const newData = {
-      name: formInputData.task,
-      startDate: formInputData.startDate,
-      endDate: formInputData.endDate,
-      priority: formInputData.priority,
+      name: formInputData.project,
+      description: formInputData.description,
     };
 
-    props.editTask(props.id, newData);
+    props.editProject(props.id, newData);
     setShowModal(false);
   };
   return (
     <div className="hover:bg-slate-50">
-      <li className="task mb-5 flex flex-col items-start gap-3">
-        <div className="task-info flex items-center gap-1">
+      <li className="project mb-5 flex flex-col items-start gap-3 ">
+        <div className="project-info flex items-center gap-1">
           <input
             type="checkbox"
             className="w-4 h-4"
             name=""
             id={props.id}
             defaultChecked={props.completed}
-            onChange={() => props.toggleTaskCompleted(props.id)}
+            onChange={() => props.toggleProjectCompleted(props.id)}
           />
           <label htmlFor={props.id} className="text-2xl">
             {props.name}
           </label>
         </div>
-        <div className="additional-info flex justify-start items-center gap-8 text-xs">
-          <p>
-            <span className="font-semibold">Start Date: </span>
-            {props.startDate}
-          </p>
-          <p>
-            <span className="font-semibold">End Date: </span>
-            {props.endDate}
-          </p>
-          <p>
-            <span className="font-semibold">Priority: </span>
-            <span className="bg-red-200 px-3 py-1 rounded-lg font-bold ">
-              {props.priority}
-            </span>
-          </p>
+        <div className="additional-info flex justify-start items-center text-md">
+          <p>{props.description}</p>
         </div>
         <div className="action-box flex justify-start items-center gap-4 ">
           <button
@@ -73,7 +56,7 @@ export const Todo = (props) => {
           </button>
           <button
             className="bg-red-600 px-3 py-1 hover:bg-red-500 text-white rounded-md"
-            onClick={() => props.deleteTask(props.id)}
+            onClick={() => props.deleteProject(props.id)}
           >
             Delete
           </button>
@@ -88,7 +71,7 @@ export const Todo = (props) => {
               <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
                 {/*header*/}
                 <div className="flex items-start justify-between p-5 border-b border-solid border-slate-200 rounded-t">
-                  <h3 className="text-3xl font-semibold">Edit Task</h3>
+                  <h3 className="text-3xl font-semibold">Edit Project</h3>
                   <button
                     className="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
                     onClick={() => setShowModal(false)}
@@ -102,14 +85,14 @@ export const Todo = (props) => {
                   {/*body*/}
                   <div className="relative p-6 flex-auto">
                     <div className="input-container flex flex-col mb-4">
-                      <label htmlFor="task" className="mb-2">
-                        Task
+                      <label htmlFor="project" className="mb-2">
+                        Project
                       </label>
                       <input
                         type="text"
-                        id="task"
-                        name="task"
-                        value={formInputData.task}
+                        id="project"
+                        name="project"
+                        value={formInputData.project}
                         onChange={handleChange}
                         className="rounded-md border-2 p-3 border-gray-300 focus:outline-gray-500"
                       />
@@ -118,37 +101,11 @@ export const Todo = (props) => {
                       <label htmlFor="startDate" className="mb-2">
                         Start Date
                       </label>
-                      <input
+                      <textarea
                         type="date"
                         id="startDate"
                         name="startDate"
-                        value={formInputData.startDate}
-                        onChange={handleChange}
-                        className="rounded-md border-2 p-3 border-gray-300 focus:outline-gray-500"
-                      />
-                    </div>
-                    <div className="input-container flex flex-col mb-4">
-                      <label htmlFor="endDate" className="mb-2">
-                        End Date
-                      </label>
-                      <input
-                        type="date"
-                        id="endDate"
-                        name="endDate"
-                        value={formInputData.endDate}
-                        onChange={handleChange}
-                        className="rounded-md border-2 p-3 border-gray-300 focus:outline-gray-500"
-                      />
-                    </div>
-                    <div className="input-container flex flex-col mb-4">
-                      <label htmlFor="priority" className="mb-2">
-                        Priority
-                      </label>
-                      <input
-                        type="text"
-                        id="priority"
-                        name="priority"
-                        value={formInputData.priority}
+                        value={formInputData.description}
                         onChange={handleChange}
                         className="rounded-md border-2 p-3 border-gray-300 focus:outline-gray-500"
                       />
