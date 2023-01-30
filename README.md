@@ -1,3 +1,3 @@
-This is my To Do App developed using React and Tailwind CSS.
+This is a Basic To Do App developed using React and Tailwind CSS.
 
-CURRENTLY WORK IN PROGRESS
+Click on Sign In button without any details to get started.
